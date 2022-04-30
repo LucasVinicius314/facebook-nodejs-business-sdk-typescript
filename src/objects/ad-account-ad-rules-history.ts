@@ -6,7 +6,8 @@
  * LICENSE file in the root directory of this source tree.
  * @flow
  */
-import {AbstractCrudObject} from './../abstract-crud-object';
+
+import { AbstractCrudObject } from '../abstract-crud-object'
 
 /**
  * AdAccountAdRulesHistory
@@ -14,7 +15,7 @@ import {AbstractCrudObject} from './../abstract-crud-object';
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
 export default class AdAccountAdRulesHistory extends AbstractCrudObject {
-  static get Fields (): Object {
+  static get Fields() {
     return Object.freeze({
       evaluation_spec: 'evaluation_spec',
       exception_code: 'exception_code',
@@ -25,10 +26,10 @@ export default class AdAccountAdRulesHistory extends AbstractCrudObject {
       rule_id: 'rule_id',
       schedule_spec: 'schedule_spec',
       timestamp: 'timestamp',
-    });
+    })
   }
 
-  static get Action (): Object {
+  static get Action() {
     return Object.freeze({
       budget_not_redistributed: 'BUDGET_NOT_REDISTRIBUTED',
       changed_bid: 'CHANGED_BID',
@@ -41,12 +42,12 @@ export default class AdAccountAdRulesHistory extends AbstractCrudObject {
       not_changed: 'NOT_CHANGED',
       paused: 'PAUSED',
       unpaused: 'UNPAUSED',
-    });
+    })
   }
-  static get EvaluationType (): Object {
+  static get EvaluationType() {
     return Object.freeze({
       schedule: 'SCHEDULE',
       trigger: 'TRIGGER',
-    });
+    })
   }
 }

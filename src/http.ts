@@ -7,34 +7,36 @@
  *
  * @format
  */
-import Api from './api';
-import HTTP_STATUS from './http-status';
-const requestPromise = require('request-promise');
+import Api from './api'
+import HTTP_STATUS from './http-status'
+const requestPromise = require('request-promise')
+
+import {} from 'request-promise'
 
 /**
  * Isomorphic Http Promise Requests Class
  * @flow
  */
 export default class Http {
-  /**
-   * Request
-   * @param   {String}  method
-   * @param   {String}  url
-   * @param   {Object}  [data]
-   * @return  {Promise}
-   */
   static request(
     method: string,
     url: string,
     data: Object,
     files: Object,
-    useMultipartFormData: Boolean,
-    showHeader: Boolean,
-  ): Promise<*> {
+    useMultipartFormData: boolean,
+    showHeader: boolean
+  ): Promise<any> {
     if (typeof window !== 'undefined' && window.XMLHttpRequest) {
-      return Http.xmlHttpRequest(method, url, data);
+      return Http.xmlHttpRequest(method, url, data)
     }
-    return Http.requestPromise(method, url, data, files, useMultipartFormData, showHeader);
+    return Http.requestPromise(
+      method,
+      url,
+      data,
+      files,
+      useMultipartFormData,
+      showHeader
+    )
   }
 
   /**
@@ -44,37 +46,41 @@ export default class Http {
    * @param   {Object}  [data]
    * @return  {Promise}
    */
-  static xmlHttpRequest(method, url, data): Promise<*> {
+  static xmlHttpRequest(
+    method: string,
+    url: string | URL,
+    data: any
+  ): Promise<any> {
     return new Promise((resolve, reject) => {
-      const request = new window.XMLHttpRequest();
-      request.open(method, url);
-      request.onload = function() {
+      const request = new window.XMLHttpRequest()
+      request.open(method, url)
+      request.onload = function () {
         try {
-          const response = JSON.parse(request.response);
+          const response = JSON.parse(request.response)
 
           if (request.status.toString() === HTTP_STATUS.OK) {
-            resolve(response);
+            resolve(response)
           } else {
             reject(
               new Error({
                 body: response,
                 status: request.status,
-              }),
-            );
+              })
+            )
           }
         } catch (e) {
           reject(
             new Error({
               body: request.responseText,
               status: request.status,
-            }),
-          );
+            })
+          )
         }
-      };
-      request.setRequestHeader('Content-Type', 'application/json');
-      request.setRequestHeader('Accept', 'application/json');
-      request.send(JSON.stringify(data));
-    });
+      }
+      request.setRequestHeader('Content-Type', 'application/json')
+      request.setRequestHeader('Accept', 'application/json')
+      request.send(JSON.stringify(data))
+    })
   }
 
   /**
@@ -96,33 +102,33 @@ export default class Http {
     data: Object,
     files: Object,
     useMultipartFormData: Boolean = false,
-    showHeader: Boolean = false,
+    showHeader: Boolean = false
   ): Promise<*> {
     const options = {
       method: method,
       uri: url,
       json: !useMultipartFormData,
-      headers: {'User-Agent': `fbbizsdk-nodejs-v${Api.SDK_VERSION}`},
+      headers: { 'User-Agent': `fbbizsdk-nodejs-v${Api.SDK_VERSION}` },
       body: Object,
       resolveWithFullResponse: showHeader,
-    };
+    }
     // Prevent null or undefined input
     // because it can be merged with the files argument later
     if (!data) {
-      data = {};
+      data = {}
     }
 
-    options.body = data;
+    options.body = data
 
     // Handle file attachments if provided
     if (useMultipartFormData || (files && Object.keys(files).length > 0)) {
       // Use formData instead of body (required by the request-promise library)
-      options.formData = Object.assign(data, files);
-      delete options.body;
+      options.formData = Object.assign(data, files)
+      delete options.body
     }
 
     return requestPromise(options).catch((response: Object) => {
-      throw response;
-    });
+      throw response
+    })
   }
 }

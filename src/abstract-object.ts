@@ -12,28 +12,28 @@
  * @format
  */
 export default class AbstractObject {
-  _data: any;
-  _fields: Array<string>;
+  _data: any
+  _fields: Array<string>
   // This is a Flow workaround for setting `this[field]` in the set() function.
-  $key: string;
-  $value: mixed;
+  $key: string
+  $value: mixed
 
   static get Fields(): {} {
-    return Object.freeze({});
+    return Object.freeze({})
   }
 
   constructor() {
-    this._data = {};
+    this._data = {}
     if (this.constructor.Fields === undefined) {
       throw new Error(
-        'A "Fields" frozen object must be defined in the object class',
-      );
+        'A "Fields" frozen object must be defined in the object class'
+      )
     }
-    let fields: any = this.constructor.Fields;
-    this._fields = Object.keys(fields);
-    this._fields.forEach(field => {
-      this._defineProperty(field);
-    });
+    let fields: any = this.constructor.Fields
+    this._fields = Object.keys(fields)
+    this._fields.forEach((field) => {
+      this._defineProperty(field)
+    })
   }
 
   /**
@@ -43,25 +43,22 @@ export default class AbstractObject {
   _defineProperty(field: string) {
     Object.defineProperty(this, field, {
       get: () => this._data[field],
-      set: value => {
-        this._data[field] = value;
+      set: (value) => {
+        this._data[field] = value
       },
       enumerable: true,
-    });
+    })
   }
 
   /**
    * Set data field
-   * @param {String} field
-   * @param {Mixed} value
-   * @return this
    */
-  set(field: string, value: mixed): AbstractObject {
+  set(field: string, value: any): AbstractObject {
     if (this._fields.indexOf(field) < 0) {
-      this._defineProperty(field);
+      this._defineProperty(field)
     }
-    this[field] = value;
-    return this;
+    this[field] = value
+    return this
   }
 
   /**
@@ -70,10 +67,10 @@ export default class AbstractObject {
    * @return this
    */
   setData(data: Object): AbstractObject {
-    Object.keys(data).forEach(key => {
-      this.set(key, data[key]);
-    });
-    return this;
+    Object.keys(data).forEach((key) => {
+      this.set(key, data[key])
+    })
+    return this
   }
 
   /**
@@ -81,6 +78,6 @@ export default class AbstractObject {
    * @return {Object}
    */
   exportData(): Object {
-    return this._data;
+    return this._data
   }
 }

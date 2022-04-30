@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "lib": ["ES2021", "DOM"],
+    "skipLibCheck": true,
+    "target": "ES5"
+  },
+  "exclude": ["node_modules", "dist"],
+  "include": ["src"]
+}

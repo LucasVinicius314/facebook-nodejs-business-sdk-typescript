@@ -8,16 +8,16 @@
  * @format
  */
 
-import HttpServiceInterface from './http-service-interface';
+import HttpServiceInterface from './http-service-interface'
 
 export default class HttpServiceClientConfig {
-    static _client: HttpServiceInterface;
+  static _client: HttpServiceInterface
 
-    static setClient(client: HttpServiceInterface) {
-        this._client = client;
-    }
+  static setClient(client: HttpServiceInterface) {
+    this._client = client
+  }
 
-    static getClient() {
-        return this._client;
-    }
+  static getClient() {
+    return this._client
+  }
 }

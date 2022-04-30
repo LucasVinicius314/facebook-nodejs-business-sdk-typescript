@@ -6,7 +6,8 @@
  * LICENSE file in the root directory of this source tree.
  * @flow
  */
-import {AbstractCrudObject} from './../abstract-crud-object';
+
+import { AbstractCrudObject } from '../abstract-crud-object'
 
 /**
  * AdAccountAdVolume
@@ -14,7 +15,7 @@ import {AbstractCrudObject} from './../abstract-crud-object';
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
 export default class AdAccountAdVolume extends AbstractCrudObject {
-  static get Fields (): Object {
+  static get Fields() {
     return Object.freeze({
       actor_id: 'actor_id',
       actor_name: 'actor_name',
@@ -22,16 +23,19 @@ export default class AdAccountAdVolume extends AbstractCrudObject {
       ad_limit_scope_business_manager_id: 'ad_limit_scope_business_manager_id',
       ad_limit_set_by_page_admin: 'ad_limit_set_by_page_admin',
       ads_running_or_in_review_count: 'ads_running_or_in_review_count',
-      ads_running_or_in_review_count_subject_to_limit_set_by_page: 'ads_running_or_in_review_count_subject_to_limit_set_by_page',
-      current_account_ads_running_or_in_review_count: 'current_account_ads_running_or_in_review_count',
+      ads_running_or_in_review_count_subject_to_limit_set_by_page:
+        'ads_running_or_in_review_count_subject_to_limit_set_by_page',
+      current_account_ads_running_or_in_review_count:
+        'current_account_ads_running_or_in_review_count',
       future_limit_activation_date: 'future_limit_activation_date',
-      future_limit_on_ads_running_or_in_review: 'future_limit_on_ads_running_or_in_review',
+      future_limit_on_ads_running_or_in_review:
+        'future_limit_on_ads_running_or_in_review',
       limit_on_ads_running_or_in_review: 'limit_on_ads_running_or_in_review',
       recommendations: 'recommendations',
-    });
+    })
   }
 
-  static get RecommendationType (): Object {
+  static get RecommendationType() {
     return Object.freeze({
       aco_toggle: 'ACO_TOGGLE',
       aggregated_bid_limited: 'AGGREGATED_BID_LIMITED',
@@ -43,7 +47,8 @@ export default class AdAccountAdVolume extends AbstractCrudObject {
       creative_fatigue: 'CREATIVE_FATIGUE',
       creative_limited: 'CREATIVE_LIMITED',
       dead_link: 'DEAD_LINK',
-      ecosystem_bid_reduce_l1_cardinality: 'ECOSYSTEM_BID_REDUCE_L1_CARDINALITY',
+      ecosystem_bid_reduce_l1_cardinality:
+        'ECOSYSTEM_BID_REDUCE_L1_CARDINALITY',
       fragmentation: 'FRAGMENTATION',
       learning_limited: 'LEARNING_LIMITED',
       syd_test_mode: 'SYD_TEST_MODE',
@@ -51,6 +56,6 @@ export default class AdAccountAdVolume extends AbstractCrudObject {
       top_campaigns_with_ads_under_cap: 'TOP_CAMPAIGNS_WITH_ADS_UNDER_CAP',
       uneconomical_ads_throttling: 'UNECONOMICAL_ADS_THROTTLING',
       zero_impression: 'ZERO_IMPRESSION',
-    });
+    })
   }
 }

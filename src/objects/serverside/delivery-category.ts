@@ -12,19 +12,18 @@
  */
 
 export default Object.freeze({
+  /**
+   * Customer needs to enter the store to get the purchased product.
+   */
+  IN_STORE: 'in_store',
 
   /**
-  * Customer needs to enter the store to get the purchased product.
-  */
-  IN_STORE : 'in_store',
+   * Customer picks up their order by driving to a store and waiting inside their vehicle.
+   */
+  CURBSIDE: 'curbside',
 
   /**
-  * Customer picks up their order by driving to a store and waiting inside their vehicle.
-  */
-  CURBSIDE : 'curbside',
-
-  /**
-  * Purchase is delivered to the customer's home.
-  */
-  HOME_DELIVERY : 'home_delivery',
-});
+   * Purchase is delivered to the customer's home.
+   */
+  HOME_DELIVERY: 'home_delivery',
+})

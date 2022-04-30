@@ -38,6 +38,8 @@
     "request-promise": "~4.1.1"
   },
   "devDependencies": {
+    "@types/node": "^17.0.30",
+    "@types/request-promise": "^4.1.48",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.26.3",
     "babel-eslint": "^7.2.3",
@@ -72,9 +74,7 @@
     "vinyl-source-stream": "~2.0.0"
   },
   "scripts": {
-    "prepublish": "gulp dist",
     "start": "semistandard --fix",
-    "flow": "flow",
     "test": "jest"
   },
   "main": "./dist/cjs.js",

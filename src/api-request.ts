@@ -7,20 +7,21 @@
  * @flow
  * @format
  */
-import fs from 'fs';
+
+import * as fs from 'fs'
 
 /**
  * Represents an API request
  */
 class APIRequest {
-  _nodeId: string;
-  _method: string;
-  _endpoint: string;
-  _path: Array<string>;
-  _fields: Array<string>;
-  _params: Object;
-  _fileParams: Object;
-  _fileCounter: number;
+  _nodeId: string
+  _method: string
+  _endpoint: string
+  _path: Array<string>
+  _fields: Array<string>
+  _params: { [name: string]: string }
+  _fileParams: { [name: string]: any }
+  _fileCounter: number
 
   /**
    * @param {string} nodeId The node id to perform the api call.
@@ -28,14 +29,14 @@ class APIRequest {
    * @param {string} endpoint The edge of the api call.
    */
   constructor(nodeId: string, method: string, endpoint: string) {
-    this._nodeId = nodeId;
-    this._method = method;
-    this._endpoint = endpoint.replace('/', '');
-    this._path = [nodeId, this.endpoint];
-    this._fields = [];
-    this._fileParams = Object.create(null);
-    this._params = Object.create(null);
-    this._fileCounter = 0;
+    this._nodeId = nodeId
+    this._method = method
+    this._endpoint = endpoint.replace('/', '')
+    this._path = [nodeId, this.endpoint]
+    this._fields = []
+    this._fileParams = Object.create(null)
+    this._params = Object.create(null)
+    this._fileCounter = 0
   }
 
   /**
@@ -43,7 +44,7 @@ class APIRequest {
    * @return {string} Node ID
    */
   get nodeId(): string {
-    return this._nodeId;
+    return this._nodeId
   }
 
   /**
@@ -51,7 +52,7 @@ class APIRequest {
    * @return {string} HTTP method
    */
   get method(): string {
-    return this._method;
+    return this._method
   }
 
   /**
@@ -59,7 +60,7 @@ class APIRequest {
    * @return {string} Endpoint edge
    */
   get endpoint(): string {
-    return this._endpoint;
+    return this._endpoint
   }
 
   /**
@@ -67,7 +68,7 @@ class APIRequest {
    * @return {Array<string>} Array of path tokens
    */
   get path(): Array<string> {
-    return this._path;
+    return this._path
   }
 
   /**
@@ -75,7 +76,7 @@ class APIRequest {
    * @return {Array<string>} Array of request fields
    */
   get fields(): Array<string> {
-    return this._fields;
+    return this._fields
   }
 
   /**
@@ -84,7 +85,7 @@ class APIRequest {
    */
   get params(): Object {
     // Deep cloning when object value is not a function
-    return JSON.parse(JSON.stringify(this._params));
+    return JSON.parse(JSON.stringify(this._params))
   }
 
   /**
@@ -93,7 +94,7 @@ class APIRequest {
    */
   get fileParams(): Object {
     // Deep cloning when object value is not a function
-    return JSON.parse(JSON.stringify(this._fileParams));
+    return JSON.parse(JSON.stringify(this._fileParams))
   }
 
   /**
@@ -101,17 +102,17 @@ class APIRequest {
    * @return {APIReqeust} APIRequest instance
    */
   addFile(filePath: string): APIRequest {
-    const fileKey = `source${this._fileCounter}`;
-    const stats = fs.lstatSync(filePath);
+    const fileKey = `source${this._fileCounter}`
+    const stats = fs.lstatSync(filePath)
 
     if (!stats.isFile()) {
-      throw Error(`Cannot find file ${filePath}!`);
+      throw Error(`Cannot find file ${filePath}!`)
     }
 
-    this._fileParams[fileKey] = filePath;
-    this._fileCounter += 1;
+    this._fileParams[fileKey] = filePath
+    this._fileCounter += 1
 
-    return this;
+    return this
   }
 
   /**
@@ -120,9 +121,9 @@ class APIRequest {
    */
   addFiles(filePaths: Array<string>): APIRequest {
     for (let filePath of filePaths) {
-      this.addFile(filePath);
+      this.addFile(filePath)
     }
-    return this;
+    return this
   }
 
   /**
@@ -131,10 +132,10 @@ class APIRequest {
    */
   addField(field: string): APIRequest {
     if (!this._fields.includes(field)) {
-      this._fields.push(field);
+      this._fields.push(field)
     }
 
-    return this;
+    return this
   }
 
   /**
@@ -143,32 +144,27 @@ class APIRequest {
    */
   addFields(fields: Array<string>): APIRequest {
     for (let field of fields) {
-      this.addField(field);
+      this.addField(field)
     }
 
-    return this;
+    return this
   }
 
-  /**
-   * @param {string} key Param key
-   * @param {*} value Param value
-   * @return {APIRequest} APIRequest instance
-   */
   addParam(key: string, value: any): APIRequest {
-    this._params[key] = value;
+    this._params[key] = value
 
-    return this;
+    return this
   }
 
   /**
    * @param {Object} params An object containing param keys and values
    * @return {APIRequest} APIRequest instance
    */
-  addParams(params: Object): APIRequest {
-    this._params = params;
+  addParams(params: { [name: string]: any }): APIRequest {
+    this._params = params
 
-    return this;
+    return this
   }
 }
 
-export default APIRequest;
+export default APIRequest

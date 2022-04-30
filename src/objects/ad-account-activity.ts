@@ -6,7 +6,8 @@
  * LICENSE file in the root directory of this source tree.
  * @flow
  */
-import {AbstractCrudObject} from './../abstract-crud-object';
+
+import { AbstractCrudObject } from '../abstract-crud-object'
 
 /**
  * AdAccountActivity
@@ -14,7 +15,7 @@ import {AbstractCrudObject} from './../abstract-crud-object';
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
 export default class AdAccountActivity extends AbstractCrudObject {
-  static get Fields (): Object {
+  static get Fields() {
     return Object.freeze({
       created_by: 'created_by',
       created_time: 'created_time',
@@ -45,16 +46,11 @@ export default class AdAccountActivity extends AbstractCrudObject {
       tier_old: 'tier_old',
       time_updated_new: 'time_updated_new',
       time_updated_old: 'time_updated_old',
-    });
+    })
   }
 
-
-  
-  get (fields: Array<string>, params: Object = {}): AdAccountActivity {
+  get(fields: Array<string>, params: Object = {}): AdAccountActivity {
     // $FlowFixMe : Support Generic Types
-    return this.read(
-      fields,
-      params
-    );
+    return this.read(fields, params)
   }
 }
